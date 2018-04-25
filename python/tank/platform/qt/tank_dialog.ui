@@ -20,7 +20,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -36,7 +45,16 @@
        <property name="spacing">
         <number>0</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -55,6 +73,7 @@
          </property>
          <property name="styleSheet">
           <string notr="true">#top_group {
+background-image: url(:/Tank.Platform.Qt/bg.png); 
 background-color:  #2D2D2D;
 border: none;
 border-bottom:1px solid #202020;
@@ -101,13 +120,19 @@ border-bottom:1px solid #202020;
           </item>
           <item>
            <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>Gotham Bold</family>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
             <property name="styleSheet">
              <string notr="true">/* want this stylesheet to apply to the label but not the tooltip */
 QLabel{
-    color: white;
+    color: rgba(230, 230, 230, 255);
     font-size: 20px;
     margin-left: 5px;
-    font-family: &quot;Open Sans&quot;;
+    font-family: &quot;Gotham Bold&quot;;
     font-style: &quot;Regular&quot;;
 }</string>
             </property>
@@ -204,7 +229,16 @@ background-image: url(:/Tank.Platform.Qt/arrow_pressed.png);
 }</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>1</number>
+       </property>
+       <property name="topMargin">
+        <number>1</number>
+       </property>
+       <property name="rightMargin">
+        <number>1</number>
+       </property>
+       <property name="bottomMargin">
         <number>1</number>
        </property>
        <item>
@@ -225,7 +259,16 @@ background-image: url(:/Tank.Platform.Qt/arrow_pressed.png);
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -323,7 +366,7 @@ QLabel{
                <x>0</x>
                <y>0</y>
                <width>383</width>
-               <height>577</height>
+               <height>589</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4">

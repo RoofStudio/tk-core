@@ -30,6 +30,7 @@ class Ui_TankDialog(object):
         self.top_group.setMinimumSize(QtCore.QSize(0, 45))
         self.top_group.setMaximumSize(QtCore.QSize(16777215, 45))
         self.top_group.setStyleSheet("#top_group {\n"
+"background-image: url(:/Tank.Platform.Qt/bg.png); \n"
 "background-color:  #2D2D2D;\n"
 "border: none;\n"
 "border-bottom:1px solid #202020;\n"
@@ -53,12 +54,16 @@ class Ui_TankDialog(object):
         self.tank_logo.setObjectName("tank_logo")
         self.horizontalLayout.addWidget(self.tank_logo)
         self.label = QtGui.QLabel(self.top_group)
+        font = QtGui.QFont()
+        font.setFamily("Gotham Bold")
+        font.setPointSize(-1)
+        self.label.setFont(font)
         self.label.setStyleSheet("/* want this stylesheet to apply to the label but not the tooltip */\n"
 "QLabel{\n"
-"    color: white;\n"
+"    color: rgba(230, 230, 230, 255);\n"
 "    font-size: 20px;\n"
 "    margin-left: 5px;\n"
-"    font-family: \"Open Sans\";\n"
+"    font-family: \"Gotham Bold\";\n"
 "    font-style: \"Regular\";\n"
 "}")
         self.label.setObjectName("label")
@@ -160,7 +165,7 @@ class Ui_TankDialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtGui.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 383, 577))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 383, 589))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
