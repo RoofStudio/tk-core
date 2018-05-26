@@ -1,11 +1,11 @@
 # Copyright (c) 2017 Shotgun Software Inc.
-# 
+#
 # CONFIDENTIAL AND PROPRIETARY
-# 
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit 
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
 # Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your 
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 """
@@ -612,13 +612,13 @@ def _create_dependencies(tk, publish_entity, dependency_paths, dependency_ids):
     """
     Creates dependencies in shotgun from a given entity to
     a list of paths and ids. Paths not recognized are skipped.
-    
+
     :param tk: API handle
     :param publish_entity: The publish entity to set the dependencies for. This is a dictionary
                            with keys type and id.
     :param dependency_paths: List of paths on disk. List of strings.
     :param dependency_ids: List of publish entity ids to associate. List of ints
-    
+
     """
     published_file_entity_type = get_published_file_entity_type(tk)
 
@@ -628,61 +628,61 @@ def _create_dependencies(tk, publish_entity, dependency_paths, dependency_ids):
     sg_batch_data = []
 
     for dependency_path in dependency_paths:
-        
+
         # did we manage to resolve this file path against
         # a publish in shotgun?
         published_file = publishes.get(dependency_path)
-        
+
         if published_file:
             if published_file_entity_type == "PublishedFile":
 
-                req = {"request_type": "create", 
-                       "entity_type": "PublishedFileDependency", 
+                req = {"request_type": "create",
+                       "entity_type": "PublishedFileDependency",
                        "data": {"published_file": publish_entity,
                                 "dependent_published_file": published_file
                                 }
-                        } 
-                sg_batch_data.append(req)    
-            
+                        }
+                sg_batch_data.append(req)
+
             else:# == "TankPublishedFile"
 
-                req = {"request_type": "create", 
-                       "entity_type": "TankDependency", 
+                req = {"request_type": "create",
+                       "entity_type": "TankDependency",
                        "data": {"tank_published_file": publish_entity,
                                 "dependent_tank_published_file": published_file
                                 }
-                        } 
+                        }
                 sg_batch_data.append(req)
 
 
     for dependency_id in dependency_ids:
         if published_file_entity_type == "PublishedFile":
 
-            req = {"request_type": "create", 
-                   "entity_type": "PublishedFileDependency", 
+            req = {"request_type": "create",
+                   "entity_type": "PublishedFileDependency",
                    "data": {"published_file": publish_entity,
-                            "dependent_published_file": {"type": "PublishedFile", 
+                            "dependent_published_file": {"type": "PublishedFile",
                                                          "id": dependency_id }
                             }
-                    } 
+                    }
             sg_batch_data.append(req)
-            
+
         else:# == "TankPublishedFile"
-            
-            req = {"request_type": "create", 
-                   "entity_type": "TankDependency", 
+
+            req = {"request_type": "create",
+                   "entity_type": "TankDependency",
                    "data": {"tank_published_file": publish_entity,
-                            "dependent_tank_published_file": {"type": "TankPublishedFile", 
+                            "dependent_tank_published_file": {"type": "TankPublishedFile",
                                                               "id": dependency_id }
                             }
-                    } 
+                    }
             sg_batch_data.append(req)
 
 
     # push to shotgun in a single xact
     if len(sg_batch_data) > 0:
         tk.shotgun.batch(sg_batch_data)
-                
+
 
 def _calc_path_cache(tk, path):
     """
@@ -725,7 +725,7 @@ def _calc_path_cache(tk, path):
         norm_root_path = root_path.replace(os.sep, "/")
 
         # append the project name to the root path
-        proj_path = "%s/%s" % (norm_root_path, project_disk_name)
+        proj_path = os.path.join( norm_root_path, project_disk_name ) # Fix Roof Path cache
 
         if norm_path.lower().startswith(proj_path.lower()):
             # our path matches this storage!
@@ -795,4 +795,3 @@ def group_by_storage(tk, list_of_paths):
         storages_paths[root_name] = storage_info
 
     return storages_paths
-
