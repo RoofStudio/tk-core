@@ -52,7 +52,11 @@ def load_plugin(plugin_file, valid_base_class, alternate_base_classes=None):
     module = None
     try:
         imp.acquire_lock()
-        module = imp.load_source(module_uid, plugin_file)
+        # ROOF CHANGED
+        if plugin_file.lower().endswith('.pyc'):
+            module = imp.load_compiled(module_uid, plugin_file)
+        else:
+            module = imp.load_source(module_uid, plugin_file)
     except Exception:
         # log the full callstack to make sure that whatever the
         # calling code is doing, this error is logged to help
